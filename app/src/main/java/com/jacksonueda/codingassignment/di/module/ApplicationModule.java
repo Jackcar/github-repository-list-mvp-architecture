@@ -4,6 +4,14 @@ import android.app.Application;
 import android.content.Context;
 
 import com.jacksonueda.codingassignment.BuildConfig;
+import com.jacksonueda.codingassignment.data.AppRepository;
+import com.jacksonueda.codingassignment.data.local.AppLocalDataStore;
+import com.jacksonueda.codingassignment.data.remote.AppRemoteDataStore;
+import com.jacksonueda.codingassignment.di.ApiInfo;
+import com.jacksonueda.codingassignment.di.ApplicationContext;
+import com.jacksonueda.codingassignment.di.DatabaseInfo;
+import com.jacksonueda.codingassignment.di.PreferenceInfo;
+import com.jacksonueda.codingassignment.utils.AppConstants;
 
 import javax.inject.Singleton;
 
@@ -35,15 +43,7 @@ public class ApplicationModule {
 
     @Provides
     @DatabaseInfo
-    String provideDatabaseName() {
-        return AppConstants.DB_NAME;
-    }
-
-    @Provides
-    @ApiInfo
-    String provideApiKey() {
-        return BuildConfig.API_KEY;
-    }
+    String provideDatabaseName() { return AppConstants.DB_NAME; }
 
     @Provides
     @PreferenceInfo
@@ -53,25 +53,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    DataManager provideDataManager(AppDataManager appDataManager) {
-        return appDataManager;
+    AppRepository provideAppRepository(AppLocalDataStore appLocalDataStore, AppRemoteDataStore appRemoteDataStore) {
+        return new AppRepository(appLocalDataStore, appRemoteDataStore);
     }
 
-    @Provides
-    @Singleton
-    DbHelper provideDbHelper(AppDbHelper appDbHelper) {
-        return appDbHelper;
-    }
-
-    @Provides
-    @Singleton
-    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
-        return appPreferencesHelper;
-    }
-
-    @Provides
-    @Singleton
-    ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
-        return appApiHelper;
-    }
 }

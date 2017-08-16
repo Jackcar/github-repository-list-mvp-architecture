@@ -5,6 +5,7 @@ import com.jacksonueda.codingassignment.data.remote.AppRemoteDataStore;
 import com.jacksonueda.codingassignment.model.Repository;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 
@@ -13,13 +14,15 @@ import io.reactivex.Observable;
  * Created by Jackson on 09/08/17.
  */
 
+
+@Singleton
 public class AppRepository implements AppDataStore {
 
     private AppLocalDataStore mAppLocalDataStore;
     private AppRemoteDataStore mAppRemoteDataStore;
 
     @Inject
-    public void AppRepository(AppLocalDataStore appLocalDataStore, AppRemoteDataStore appRemoteDataStore) {
+    public AppRepository(AppLocalDataStore appLocalDataStore, AppRemoteDataStore appRemoteDataStore) {
         this.mAppLocalDataStore = appLocalDataStore;
         this.mAppRemoteDataStore = appRemoteDataStore;
     }

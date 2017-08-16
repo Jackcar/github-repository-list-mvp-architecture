@@ -16,19 +16,19 @@ import retrofit2.http.GET;
  */
 public class AppRemoteDataStore implements AppDataStore {
 
-    @Inject
     private Retrofit mRetrofit;
+    private AppLocalDataStore mAppLocalDataStore;
 
     @Inject
-    private AppLocalDataStore appLocalDataStore;
-
-    public AppRemoteDataStore() {
-        App.appComponent().inject(this);
+    public AppRemoteDataStore(Retrofit retrofit, AppLocalDataStore appLocalDataStore) {
+        this.mRetrofit = retrofit;
+        this.mAppLocalDataStore = appLocalDataStore;
+        App.getAppComponent().inject(this);
     }
 
     @Override
     public Observable<Repository> getRepositories() {
-
+        return Observable.just(new Repository());
     }
 
     private interface RepositoryService {

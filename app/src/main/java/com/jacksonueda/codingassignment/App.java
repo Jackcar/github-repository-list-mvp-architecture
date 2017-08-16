@@ -2,6 +2,9 @@ package com.jacksonueda.codingassignment;
 
 import android.app.Application;
 
+import com.jacksonueda.codingassignment.di.component.ApplicationComponent;
+import com.jacksonueda.codingassignment.di.module.ApplicationModule;
+
 import io.realm.Realm;
 
 /**
@@ -10,7 +13,7 @@ import io.realm.Realm;
 
 public class App extends Application {
 
-    private ApplicationComponent mApplicationComponent;
+    private static ApplicationComponent mApplicationComponent;
 
     // ========================================================================================
     // LIFECYCLE
@@ -42,7 +45,7 @@ public class App extends Application {
     // HELPERS
     // ========================================================================================
 
-    public ApplicationComponent getComponent() {
+    public static ApplicationComponent getAppComponent() {
         return mApplicationComponent;
     }
 }

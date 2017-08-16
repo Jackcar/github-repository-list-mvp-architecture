@@ -14,7 +14,7 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "https://api.github.com")
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com\"")
         }
         release {
             minifyEnabled false
